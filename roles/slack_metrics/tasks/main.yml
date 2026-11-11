@@ -57,3 +57,13 @@
         name: slack-metrics.timer
         enabled: true
         state: started
+
+    # Grafana, from the grafana role on this host, reloads the file by itself
+
+    - name: Instanciate the Slack grafana dashboard
+      ansible.builtin.template:
+        src: slack-dashboard.json.j2
+        dest: /var/lib/grafana/dashboards/slack.json
+        owner: root
+        group: grafana
+        mode: u=rw,g=r

@@ -1,3 +1,5 @@
+{# Grafana dashboard: a gauge of the members against slack_metrics_member_limit,
+   orange from slack_metrics_member_warning (80% of it, rounded to the tens) #}
 {
   "editable": true,
   "panels": [
@@ -6,7 +8,7 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "Active, non-guest, human members",
+      "description": "Active, non-guest, human members. The Slack for Nonprofits free Pro plan covers workspaces of {{ slack_metrics_member_limit }} or fewer members.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -21,18 +23,18 @@
               },
               {
                 "color": "orange",
-                "value": 450
+                "value": {{ slack_metrics_member_warning }}
               },
               {
                 "color": "red",
-                "value": 500
+                "value": {{ slack_metrics_member_limit }}
               }
             ]
           },
           "decimals": 0,
           "unit": "none",
           "min": 0,
-          "max": 500
+          "max": {{ slack_metrics_member_limit }}
         },
         "overrides": []
       },

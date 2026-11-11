@@ -1,3 +1,10 @@
 ---
 # Remote write destination of the prometheus of the grafana role, on this host
 slack_metrics_prometheus_write_url: http://localhost:9090/api/v1/write
+
+# Members the workspace may have: the Slack for Nonprofits free Pro plan covers
+# workspaces of 250 or fewer members
+slack_metrics_member_limit: 250
+# From where the dashboard turns orange: 80% of the limit, rounded to the tens
+slack_metrics_member_warning: >-
+  {{ ((slack_metrics_member_limit * 0.9 / 10) | round | int) * 10 }}
